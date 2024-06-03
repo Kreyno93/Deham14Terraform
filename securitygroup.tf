@@ -7,5 +7,6 @@ module "web_server_sg" {
 
   ingress_cidr_blocks = ["10.10.0.0/16"]
   # custom ingress for ssh
-  ingress_rules = ["ssh-tcp"]
+  ingress_rules = ["ssh-tcp", "http-tcp"]
+
 }
