@@ -1,15 +1,7 @@
 # Security Group
 
-resource "aws_security_group" "allow_tls" {
+resource "aws_security_group" "allo_http_ssh" {
   vpc_id = aws_vpc.main.id
-
-  # Allow HTTPS inbound traffic
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
 
   # Allow SSH inbound traffic
   ingress {
