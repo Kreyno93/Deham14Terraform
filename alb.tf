@@ -1,9 +1,10 @@
 module "alb" {
   source = "terraform-aws-modules/alb/aws"
 
-  name    = "my-alb"
-  vpc_id  = module.vpc.vpc_id
-  subnets = [module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.public_subnets[2]]
+  name                       = "my-alb"
+  vpc_id                     = module.vpc.vpc_id
+  subnets                    = [module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.public_subnets[2]]
+  enable_deletion_protection = false
 
   # Security Group
   security_group_ingress_rules = {
@@ -20,10 +21,6 @@ module "alb" {
       ip_protocol = "-1"
       cidr_ipv4   = "10.0.0.0/16"
     }
-  }
-
-  access_logs = {
-    bucket = "my-alb-logs"
   }
 
   target_groups = {

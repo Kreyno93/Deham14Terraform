@@ -26,7 +26,7 @@ module "ec2_instance" {
   name = "webserver_deham14"
 
   # Set count to as many availability zones as you have in your region
-  count                       = length(data.aws_availability_zones.available.names)
+  count                       = 3
   ami                         = data.aws_ami.amz2.id
   instance_type               = "t2.micro"
   key_name                    = "vockey"
