@@ -5,8 +5,9 @@ module "web_server_sg" {
   description = "Security group for web-server with HTTP ports open within VPC"
   vpc_id      = module.vpc.vpc_id
 
-  ingress_cidr_blocks = ["10.10.0.0/16"]
-  # custom ingress for ssh
-  ingress_rules = ["ssh-tcp", "http-tcp"]
+  ingress_cidr_blocks = ["0.0.0.0/0"]
 
+  # custom ingress for ssh
+  ingress_rules = ["ssh-tcp"]
+  
 }
