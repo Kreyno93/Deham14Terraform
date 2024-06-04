@@ -9,5 +9,5 @@ module "web_server_sg" {
 
   # custom ingress for ssh
   ingress_rules = ["ssh-tcp"]
-  
+
 }
