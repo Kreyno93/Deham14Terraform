@@ -23,7 +23,8 @@ data "aws_availability_zones" "available" {}
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
 
-  name = "webserver_deham14"
+# Generate Instance Name with Availability Zone
+  name = "my-ec2-instance-${data.aws_availability_zones.available.names[count.index]}"
 
   # Set count to as many availability zones as you have in your region
   count                       = 3
