@@ -31,15 +31,11 @@ module "alb" {
     ex-http = {
       port     = 80
       protocol = "HTTP"
-      default_action = {
-        type             = "forward"
-        target_group_arn = module.alb.target_group_arn
-      }
     }
   }
 
   target_groups = {
-    ex-alb = {
+    ex-instance = {
       name_prefix = "h1"
       protocol    = "HTTP"
       port        = 80
