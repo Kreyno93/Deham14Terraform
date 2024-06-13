@@ -29,7 +29,8 @@ resource "aws_autoscaling_group" "autoscaling_group" {
   termination_policies      = ["OldestInstance"]
   tag {
     key                 = "Name"
-    value               = "deham14-web"
+    # Create an individual tag for each instance
+    value               = "deham14-instance-${count.index}"
     propagate_at_launch = true
   }
 }
