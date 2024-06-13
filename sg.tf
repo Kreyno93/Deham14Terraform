@@ -1,7 +1,7 @@
 # Security Group
 
-resource "aws_security_group" "allo_http_ssh" {
-  vpc_id = aws_vpc.main.id
+resource "aws_security_group" "webserver_sg" {
+  vpc_id = aws_vpc.deham14.id
 
   # Allow SSH inbound traffic
   ingress {
@@ -34,5 +34,25 @@ resource "aws_security_group" "allo_http_ssh" {
 }
 
 output "security_group_id" {
-  value = aws_security_group.allow_tls.id
+  value = aws_security_group.webserver_sg.id
+}
+
+resource "aws_security_group" "load_balancer_sg" {
+  vpc_id = aws_vpc.deham14.id
+
+  # Allow HTTP inbound traffic
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Allow all outbound traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
