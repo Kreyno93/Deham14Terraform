@@ -56,3 +56,9 @@ resource "aws_alb_target_group_attachment" "target_group_attachment2" {
   target_id        = aws_instance.web2.id
   port             = 80
 }
+
+# Autoscaling Group Attachment
+resource "aws_autoscaling_attachment" "asg_attachment" {
+  autoscaling_group_name = aws_autoscaling_group.autoscaling_group.name
+  lb_target_group_arn    = aws_lb_target_group.target_group.arn
+}
