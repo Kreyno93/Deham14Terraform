@@ -45,17 +45,17 @@ resource "aws_lb_listener" "listener" {
   }
 }
 
-resource "aws_alb_target_group_attachment" "target_group_attachment" {
-  target_group_arn = aws_lb_target_group.target_group.arn
-  target_id        = aws_instance.web.id
-  port             = 80
-}
+# resource "aws_alb_target_group_attachment" "target_group_attachment" {
+#   target_group_arn = aws_lb_target_group.target_group.arn
+#   target_id        = aws_instance.web.id
+#   port             = 80
+# }
 
-resource "aws_alb_target_group_attachment" "target_group_attachment2" {
-  target_group_arn = aws_lb_target_group.target_group.arn
-  target_id        = aws_instance.web2.id
-  port             = 80
-}
+# resource "aws_alb_target_group_attachment" "target_group_attachment2" {
+#   target_group_arn = aws_lb_target_group.target_group.arn
+#   target_id        = aws_instance.web2.id
+#   port             = 80
+# }
 
 # Autoscaling Group Attachment
 resource "aws_autoscaling_attachment" "asg_attachment" {
