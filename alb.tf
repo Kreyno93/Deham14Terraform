@@ -1,13 +1,13 @@
 module "alb" {
   source = "terraform-aws-modules/alb/aws"
 
-  name                       = "my-alb"
-  vpc_id                     = module.vpc.vpc_id
-  subnets                    = [
-    module.vpc.public_subnets[0], 
-    module.vpc.public_subnets[1], 
+  name   = "my-alb"
+  vpc_id = module.vpc.vpc_id
+  subnets = [
+    module.vpc.public_subnets[0],
+    module.vpc.public_subnets[1],
     module.vpc.public_subnets[2]
-    ]
+  ]
   enable_deletion_protection = false
 
   # Security Group
@@ -31,22 +31,21 @@ module "alb" {
     ex-http = {
       port     = 80
       protocol = "HTTP"
-
-      forward = {
-        target_group_key = "ex-instance"
+      default_action = {
+        type             = "forward"
+        target_group_arn = module.alb.target_group_arn
       }
     }
   }
 
   target_groups = {
-    # ex-instance = {
-    #   name_prefix = "h1"
-    #   protocol    = "HTTP"
-    #   port        = 80
-    #   target_type = "instance"
-    #   target_id   = module.ec2_instance[0].id
-    # }
-    # attach autoscaling group to target group
+    ex-alb = {
+      name_prefix = "h1"
+      protocol    = "HTTP"
+      port        = 80
+      target_type = "alb"
+      target_id   = module.ec2_instance[0].id
+    }
   }
 
   tags = {
@@ -65,8 +64,7 @@ module "alb" {
 # }
 
 #Attach autoscaling group to the target group
-resource "aws_lb_target_group_attachment" "autoscaling_group_attachment" {
-  target_group_arn = module.alb.target_groups["ex-instance"]["arn"]
-  target_id       = module.asg.autoscaling_group_id
-  port            = 80
-}
+# resource "aws_autoscaling_attachment" "autoscaling_group_attachment" {
+#   autoscaling_group_name = module.asg.autoscaling_group_name
+#   lb_target_group_arn    = module.alb.arn
+# }
