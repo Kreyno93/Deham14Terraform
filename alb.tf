@@ -39,13 +39,14 @@ module "alb" {
   }
 
   target_groups = {
-    ex-instance = {
-      name_prefix = "h1"
-      protocol    = "HTTP"
-      port        = 80
-      target_type = "instance"
-      target_id   = module.ec2_instance[0].id
-    }
+    # ex-instance = {
+    #   name_prefix = "h1"
+    #   protocol    = "HTTP"
+    #   port        = 80
+    #   target_type = "instance"
+    #   target_id   = module.ec2_instance[0].id
+    # }
+    # attach autoscaling group to target group
   }
 
   tags = {
@@ -56,9 +57,16 @@ module "alb" {
 
 # Attach multiple ec2 instances to the target group
 
-resource "aws_lb_target_group_attachment" "example" {
-  count           = 3
+# resource "aws_lb_target_group_attachment" "example" {
+#   count           = 3
+#   target_group_arn = module.alb.target_groups["ex-instance"]["arn"]
+#   target_id       = module.ec2_instance[count.index].id
+#   port            = 80
+# }
+
+#Attach autoscaling group to the target group
+resource "aws_lb_target_group_attachment" "autoscaling_group_attachment" {
   target_group_arn = module.alb.target_groups["ex-instance"]["arn"]
-  target_id       = module.ec2_instance[count.index].id
+  target_id       = module.asg.autoscaling_group_id
   port            = 80
 }
