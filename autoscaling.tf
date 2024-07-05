@@ -6,17 +6,17 @@
 # # Create Launch Template
 # resource "aws_launch_template" "launch_template" {
 #   name                   = "deham14-launch-template"
-#   image_id               = data.aws_ami.amazon_linux_2.id
+#   image_id               = data.aws_ami.amazon_linux.id
 #   instance_type          = "t2.micro"
 #   user_data              = filebase64("userdata.sh")
-#   key_name               = "vockey"
+#   key_name               = "WordpressDeham14"
 #   vpc_security_group_ids = [aws_security_group.webserver_sg.id]
 # }
 
 # # Create Auto Scaling Group
 # resource "aws_autoscaling_group" "autoscaling_group" {
 #   name             = "deham14-autoscaling-group"
-#   max_size         = 3
+#   max_size         = 5
 #   min_size         = 1
 #   desired_capacity = 1
 #   launch_template {
@@ -29,9 +29,8 @@
 #   termination_policies      = ["OldestInstance"]
 #   tag {
 #     key                 = "Name"
-#     # Create an individual tag for each instance
-#     value               = "deham14-instance-${count.index}"
-#     propagate_at_launch = true
+#     value               = "deham14-autoscaling-group"
+#     propagate_at_launch = true    
 #   }
 # }
 
@@ -44,7 +43,7 @@
 #     predefined_metric_specification {
 #       predefined_metric_type = "ASGAverageCPUUtilization"
 #     }
-#     target_value = 75.0
+#     target_value = 50.0
 #   }
 # }
 

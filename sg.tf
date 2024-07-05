@@ -30,6 +30,7 @@ resource "aws_security_group" "webserver_sg" {
 
   tags = {
     Name = "WebServerSG"
+    SecurityGroupName = "WebServerSG"
   }
 }
 
@@ -58,5 +59,6 @@ resource "aws_security_group" "load_balancer_sg" {
 
   tags = {
     Name = "LoadBalancerSG"
+    SecurityGroupName = "LoadBalancerSG"
   }
 }
