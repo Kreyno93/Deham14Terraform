@@ -20,7 +20,6 @@ resource "aws_security_group" "webserver_sg" {
   }
 
   # Allow all outbound traffic
-
   egress {
     from_port   = 0
     to_port     = 0

@@ -1,4 +1,4 @@
-# # Get the latest Amazon Linux 2 AMI
+# Get the latest Amazon Linux 2 AMI
 data "aws_ami" "amazon_linux_2" {
   most_recent = true
 
@@ -8,7 +8,7 @@ data "aws_ami" "amazon_linux_2" {
   }
 }
 
-#Get latest ami ID of Amazon Linux - values = ["al2023-ami-2023*x86_64"]
+# Get latest ami ID of Amazon Linux - values = ["al2023-ami-2023*x86_64"]
 data "aws_ami" "amazon_linux" {
   most_recent = true
   owners      = ["amazon"]
@@ -33,7 +33,7 @@ resource "aws_instance" "web" {
   }
 }
 
-# # Create Web Server Instance in Public Subnet 2
+# Create Web Server Instance in Public Subnet 2
 # resource "aws_instance" "web2" {
 #   ami                    = "ami-0f76a278bc3380848" # Amazon Linux 2
 #   instance_type          = "t3.micro"
