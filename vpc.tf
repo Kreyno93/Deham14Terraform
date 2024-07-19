@@ -16,7 +16,7 @@ resource "aws_vpc" "deham14" {
 # Create Public Subnet 1 in the VPC
 resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.deham14.id
-  cidr_block              = "10.0.1.0/24" #
+  cidr_block              = "10.0.1.0/24"
   availability_zone       = "eu-north-1a"
   map_public_ip_on_launch = true
   tags = {
