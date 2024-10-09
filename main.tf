@@ -6,3 +6,8 @@ terraform {
     }
   }
 }
+
+# Creating a VPC with minimal settings
+provider "aws" {
+  region = var.aws_region_us_west_2
+}
